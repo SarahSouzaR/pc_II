@@ -12,7 +12,7 @@ public class AlunosExec {
 		
 		Alunos alunos = new Alunos();
 		try {
-			alunos.setNome("Sarah Lucas");
+			alunos.setNome("Sarah de Souza");
 			alunos.setEndereco("Rua Fernão Alves, 30");
 			alunos.setBairro("Vila Buenos Aires");
 			
@@ -20,8 +20,9 @@ public class AlunosExec {
 			AlunosJdbcDAO alunosJdbcDao = new AlunosJdbcDAO(connection);
 			
 			//alunosJdbcDao.salvar(alunos);
-			alunosJdbcDao.deletar(2); //colocar número do ID
-			//alunosJdbcDao.update("Sarah", 3)
+			alunosJdbcDao.update(alunos, 1);
+			//alunosJdbcDao.deletar(2); //colocar número do ID
+			//alunosJdbcDao.listar();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
