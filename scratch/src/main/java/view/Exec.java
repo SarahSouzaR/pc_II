@@ -48,7 +48,7 @@ public class Exec extends JFrame{
 		txtSexo.setBounds(90, 85, 225, 30);
 		
 		paine.add(btnSalvar);
-		btnSalvar.setBounds(250, 250, 130, 30);
+		btnSalvar.setBounds(250, 150, 130, 30);
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {

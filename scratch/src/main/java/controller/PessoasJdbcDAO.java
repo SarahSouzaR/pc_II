@@ -18,7 +18,7 @@ public class PessoasJdbcDAO {
 	}
 	
 	public void salvar(Pessoas p) throws SQLException {
-		String sql = "insert into tb_pessoas (id_pessoa, nome, email, sexo) values ('"+p.getId_pessoa()+"','"+p.getNome()+"', '"+p.getEmail()+"', '"+p.getSexo()+"')";
+		String sql = "insert into tb_pessoas (nome, email, sexo) values ('"+p.getNome()+"', '"+p.getEmail()+"', '"+p.getSexo()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
