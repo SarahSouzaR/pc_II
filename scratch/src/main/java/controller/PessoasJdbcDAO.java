@@ -25,16 +25,16 @@ public class PessoasJdbcDAO {
 		prepareStatement.close();
 	}
 	
-	public void update(Pessoas p, Integer id) throws SQLException {
-		String sql = "update tb_pessoas set nome='"+p.getNome()+"', email='"+p.getEmail()+"', sexo='"+p.getSexo()+"' where id='"+id+"';";
+	public void update(Pessoas p) throws SQLException {
+		String sql = "update tb_pessoas set nome='"+p.getNome()+"', email='"+p.getEmail()+"', sexo='"+p.getSexo()+"' where email='"+p.getEmail()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(int id) throws SQLException {
-		String sql = "delete from tb_pessoas where pessoas.id='"+id+"';";
+	public void delete(Pessoas p) throws SQLException {
+		String sql = "delete from tb_pessoas where pessoas.email='"+p.getEmail()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
