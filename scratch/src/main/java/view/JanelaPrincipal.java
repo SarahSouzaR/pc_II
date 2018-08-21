@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,45 +12,77 @@ import javax.swing.JMenuItem;
 
 public class JanelaPrincipal extends JFrame {
 	
-	JMenuBar barra = new JMenuBar();
-	
-	JMenu cadastro = new JMenu("Cadastro");
-	
-	JMenuItem novo = new JMenuItem("Novo");
-	JMenuItem editar = new JMenuItem("Editar");
-	
+	//Janela que recebe a barra de menu e abre as outras janelas dentro
 	JDesktopPane jdPane = new JDesktopPane();
 	//Tela telaCadUsuarios, telaCadTarefas, telaCadTime;
 	
-	public JanelaPrincipal() {
+	//Barra do menu
+	JMenuBar barra = new JMenuBar();
+	
+	//Componentes da barra
+	JMenu menuPessoas = new JMenu("Pessoas");//exibe a lista de pessoas
+	JMenu menuTarefas = new JMenu("Tarefas");//exibe a lista de tarefas
+	JMenu menuMetodologia = new JMenu("Metodologias");//exibe a lista de metodologias
+	JMenu menuTime = new JMenu("Times");//exibe a lista de times
+	
+	//Itens dos componentes	
+	JMenuItem cadPessoa = new JMenuItem("Cadastrar Usuário");//cadastra pessoa
+	
+	JMenuItem cadTarefa = new JMenuItem("Inserir Tarefa");
+	
+	JMenuItem cadMetodologia = new JMenuItem("Inserir Metodologia");
+	
+	JMenuItem cadTime = new JMenuItem("Entrar em um Time");
+		
+	public JanelaPrincipal() {	
+		super ("Scratch Out - Gerenciador de Tarefas");
+		
 		getContentPane().add(jdPane);
 		
-		barra.add(cadastro);
+		Container paine = this.getContentPane();
+		this.setJMenuBar(barra);
 		
-		cadastro.add(novo);
-		cadastro.add(editar);
+		barra.add(menuPessoas);
+		barra.add(menuTarefas);
+		barra.add(menuMetodologia);
+		barra.add(menuTime);
+				
+		menuPessoas.add(cadPessoa);
+		cadPessoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//instancia da janela que abre o cadastro das pessoas;
+				CadPessoas cadPessoas = new CadPessoas();
+			}
+		});
 		
-		setJMenuBar(barra);
+		menuTarefas.add(cadTarefa);
+		cadTarefa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//instancia da janela de tarefas
+			}
+		});
 		
-		novo.addActionListener((ActionListener) this); //tirar o action listener do parenteses
-		editar.addActionListener((ActionListener) this);
+		menuMetodologia.add(cadMetodologia);
+		cadMetodologia.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				//instancia da janela de metodologias
+			}
+		});
 		
-		setSize(800, 600);
-		setVisible(true);		
+		menuTime.add(cadTime);
+		cadTime.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				//instancia da janela de Times
+			}
+		});
+		
+		this.setVisible(true);
+		this.setSize(800, 600);
+		this.setLayout(null);
+		this.setResizable(true);
 	}
 	
-	/*
-	 public void actionPerformed(ActionEvent evt) {
-		if (evt.getSource() == novo) {
-			if(telaCadUsuarios == null) {
-				
-			}
-		}
-	}
-	*/
-
 	public static void main(String[] args) {
 		JanelaPrincipal jp = new JanelaPrincipal();		
 	}
-
 }

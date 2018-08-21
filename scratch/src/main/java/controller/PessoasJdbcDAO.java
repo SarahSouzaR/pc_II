@@ -34,7 +34,7 @@ public class PessoasJdbcDAO {
 	}
 	
 	public void delete(Pessoas p) throws SQLException {
-		String sql = "delete from tb_pessoas where pessoas.email='"+p.getEmail()+"';";
+		String sql = "delete from tb_pessoas where email='"+p.getEmail()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

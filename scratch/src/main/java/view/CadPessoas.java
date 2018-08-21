@@ -14,44 +14,45 @@ import controller.PessoasJdbcDAO;
 import controller.JdbUtil;
 import model.Pessoas;
 
-public class Exec extends JFrame{
+public class CadPessoas extends JFrame{
 	
 	JTextField txtNome = new JTextField();
-	JLabel nome = new JLabel("NOME: ");
+	JLabel lblNome = new JLabel("Nome: ");
 	
 	JTextField txtEmail = new JTextField();
-	JLabel email = new JLabel("E-MAIL: ");
+	JLabel lblEmail = new JLabel("E-mail: ");
 	
 	JTextField txtSexo = new JTextField();
-	JLabel sexo = new JLabel("SEXO: ");
+	JLabel lblSexo = new JLabel("Sexo: ");
 	
 	JButton btnSalvar = new JButton("Salvar");
 	JButton btnEditar = new JButton("Editar");
 	JButton btnApagar = new JButton("Apagar");
 	
-	public Exec() {
-		super("Cadastro Alunos");
+	public CadPessoas() {
+		super("Cadastro de Usuários");
 		
 		Container paine = this.getContentPane();
 		
-		paine.add(nome);
+		paine.add(lblNome);
 		paine.add(txtNome);	
-		nome.setBounds(70, 25, 45, 30);
+		lblNome.setBounds(70, 25, 45, 30);
 		txtNome.setBounds(150, 25, 310, 30);
 		
-		paine.add(email);
+		paine.add(lblEmail);
 		paine.add(txtEmail);	
-		email.setBounds(70, 60, 70, 30);
+		lblEmail.setBounds(70, 60, 70, 30);
 		txtEmail.setBounds(150, 60, 310, 30);	
 		
-		paine.add(sexo);
+		paine.add(lblSexo);
 		paine.add(txtSexo);	
-		sexo.setBounds(70, 95, 70, 30);
+		lblSexo.setBounds(70, 95, 70, 30);
 		txtSexo.setBounds(150, 95, 310, 30);
 		
 		paine.add(btnSalvar);
 		btnSalvar.setBounds(100, 160, 100, 30);
 		btnSalvar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pessoas pessoas = new Pessoas();
@@ -63,6 +64,9 @@ public class Exec extends JFrame{
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);
 					
 					pessoasJdbcDAO.salvar(pessoas);
+					
+					//Fecha a janela depois da ação
+					dispose();
 				}
 				catch(Exception ex) {
 					ex.printStackTrace();
@@ -73,6 +77,7 @@ public class Exec extends JFrame{
 		paine.add(btnEditar);
 		btnEditar.setBounds(220, 160, 100, 30);
 		btnEditar.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pessoas pessoas = new Pessoas();
@@ -84,6 +89,8 @@ public class Exec extends JFrame{
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);
 					
 					pessoasJdbcDAO.update(pessoas);
+					
+					dispose();
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -94,6 +101,7 @@ public class Exec extends JFrame{
 		paine.add(btnApagar);
 		btnApagar.setBounds(340, 160, 100, 30);
 		btnApagar.addActionListener(new ActionListener () {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pessoas pessoas = new Pessoas();
@@ -105,6 +113,8 @@ public class Exec extends JFrame{
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);					
 					
 					pessoasJdbcDAO.delete(pessoas);
+					
+					dispose();
 				}
 				catch (Exception ex) {
 					ex.printStackTrace();
@@ -115,10 +125,10 @@ public class Exec extends JFrame{
 	this.setLayout(null);
 	this.setVisible(true);
 	this.setSize(560, 280);
-	this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+	this.setDefaultCloseOperation(HIDE_ON_CLOSE); //para não fechar toda a aplicação
 	}		
 	
 	public static void main(String[] args) {
-		Exec exec = new Exec();
+		CadPessoas cadPessoas = new CadPessoas();
 	}
 }
