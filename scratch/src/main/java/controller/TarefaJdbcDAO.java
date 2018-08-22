@@ -18,23 +18,23 @@ public class TarefaJdbcDAO {
 	}
 	
 	public void salvar(Tarefa t) throws SQLException {
-		String sql = "insert into tb_tarefa (id_tarefa, titulo, prazo_estimado, descricao, dt_inicio, dt_termino) values ('"+t.getId_tarefa()+"','"+t.getTitulo()+"', '"+t.getPrazo_estimado()+"', '"+t.getDescricao()+"', '"+t.getDt_inicio()+"', '"+t.getDt_termino()+"')";
+		String sql = "insert into tb_tarefa (titulo, prazo_estimado, descricao, dt_inicio, dt_termino) values ('"+t.getTitulo()+"', '"+t.getPrazo_estimado()+"', '"+t.getDescricao()+"', '"+t.getDt_inicio()+"', '"+t.getDt_termino()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void update(Tarefa t, Integer id) throws SQLException {
-		String sql = "update tb_tarefa set titulo='"+t.getTitulo()+"', prazo_estimado='"+t.getPrazo_estimado()+"', descricao='"+t.getDescricao()+"', dt_inicio='"+t.getDt_inicio()+"', dt_termino='"+t.getDt_termino()+"' where id='"+id+"';";
+	public void update(Tarefa t) throws SQLException {
+		String sql = "update tb_tarefa set titulo='"+t.getTitulo()+"', prazo_estimado='"+t.getPrazo_estimado()+"', descricao='"+t.getDescricao()+"', dt_inicio='"+t.getDt_inicio()+"', dt_termino='"+t.getDt_termino()+"' where titulo='"+t.getTitulo()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(int id) throws SQLException {
-		String sql = "delete from tb_tarefa where tarefa.id='"+id+"';";
+	public void delete(Tarefa t) throws SQLException {
+		String sql = "delete from tb_tarefa where titulo='"+t.getTitulo()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

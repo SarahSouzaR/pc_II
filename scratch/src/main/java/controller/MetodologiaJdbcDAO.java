@@ -25,16 +25,16 @@ private Connection conn;
 		prepareStatement.close();
 	}
 	
-	public void update(Metodologia m, Integer id) throws SQLException {
-		String sql = "update tb_metodologia set metodo_nome='"+m.getMetodo_nome()+"' where id='"+id+"';";
+	public void update(Metodologia m) throws SQLException {
+		String sql = "update tb_metodologia set metodo_nome='"+m.getMetodo_nome()+"' where metodo_nome='"+m.getMetodo_nome()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(int id) throws SQLException {
-		String sql = "delete from tb_metodologia where metodologia.id='"+id+"';";
+	public void delete(Metodologia m) throws SQLException {
+		String sql = "delete from tb_metodologia where metodo_nome='"+m.getMetodo_nome()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

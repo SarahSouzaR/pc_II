@@ -25,16 +25,16 @@ private Connection conn;
 		prepareStatement.close();
 	}
 	
-	public void update(Time t, Integer id) throws SQLException {
-		String sql = "update tb_time set nm_time='"+t.getNm_time()+"', id_pessoa='"+t.getId_pessoa()+"' where id='"+id+"';";
+	public void update(Time t) throws SQLException {
+		String sql = "update tb_time set nm_time='"+t.getNm_time()+"', id_pessoa='"+t.getId_pessoa()+"' where nm_time='"+t.getNm_time()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(int id) throws SQLException {
-		String sql = "delete from tb_time where tarefa.id='"+id+"';";
+	public void delete(Time t) throws SQLException {
+		String sql = "delete from tb_time wherenm_time='"+t.getNm_time()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

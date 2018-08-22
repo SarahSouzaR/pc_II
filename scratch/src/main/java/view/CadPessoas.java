@@ -36,7 +36,7 @@ public class CadPessoas extends JFrame{
 		
 		paine.add(lblNome);
 		paine.add(txtNome);	
-		lblNome.setBounds(70, 25, 45, 30);
+		lblNome.setBounds(70, 25, 70, 30);
 		txtNome.setBounds(150, 25, 310, 30);
 		
 		paine.add(lblEmail);
@@ -125,6 +125,7 @@ public class CadPessoas extends JFrame{
 	this.setLayout(null);
 	this.setVisible(true);
 	this.setSize(560, 280);
+	this.setResizable(false);
 	this.setDefaultCloseOperation(HIDE_ON_CLOSE); //para não fechar toda a aplicação
 	}		
 	
