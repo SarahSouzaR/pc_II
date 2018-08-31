@@ -18,23 +18,23 @@ private Connection conn;
 	}
 	
 	public void salvar(Metodologia m) throws SQLException {
-		String sql = "insert into tb_metodologia (id_metodologia, metodo_nome) values ('"+m.getId_metodologia()+"','"+m.getMetodo_nome()+"')";
+		String sql = "insert into tb_metodologia (metodo_nome) values ('"+m.getMetodo_nome()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void update(Metodologia m) throws SQLException {
-		String sql = "update tb_metodologia set metodo_nome='"+m.getMetodo_nome()+"' where metodo_nome='"+m.getMetodo_nome()+"';";
+	public void update(Metodologia m, Integer id) throws SQLException {
+		String sql = "update tb_metodologia set metodo_nome='"+m.getMetodo_nome()+"' where id_metodologia='"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(Metodologia m) throws SQLException {
-		String sql = "delete from tb_metodologia where metodo_nome='"+m.getMetodo_nome()+"';";
+	public void delete(Integer id) throws SQLException {
+		String sql = "delete from tb_metodologia where id_metodologia='"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

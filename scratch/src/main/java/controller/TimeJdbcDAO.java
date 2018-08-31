@@ -18,23 +18,23 @@ private Connection conn;
 	}
 	
 	public void salvar(Time t) throws SQLException {
-		String sql = "insert into tb_time (id_time, nm_time, id_pessoa) values ('"+t.getId_time()+"','"+t.getNm_time()+"', '"+t.getId_pessoa()+"')";
+		String sql = "insert into tb_time (nm_time, id_pessoa) values ('"+t.getNm_time()+"', '"+t.getId_pessoa()+"')";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void update(Time t) throws SQLException {
-		String sql = "update tb_time set nm_time='"+t.getNm_time()+"', id_pessoa='"+t.getId_pessoa()+"' where nm_time='"+t.getNm_time()+"';";
+	public void update(Time t, Integer id) throws SQLException {
+		String sql = "update tb_time set nm_time='"+t.getNm_time()+"', id_pessoa='"+t.getId_pessoa()+"' where id_time='"+t.getId_time()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(Time t) throws SQLException {
-		String sql = "delete from tb_time wherenm_time='"+t.getNm_time()+"';";
+	public void delete(Integer id) throws SQLException {
+		String sql = "delete from tb_time where id_time='"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

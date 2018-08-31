@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.Container;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -16,6 +17,11 @@ import model.Pessoas;
 
 public class CadPessoas extends JFrame{
 	
+	JLabel lblObs = new JLabel("* somente para usuários cadastrados");
+	
+	JTextField txtID = new JTextField();
+	JLabel lblID = new JLabel("ID: ");
+	
 	JTextField txtNome = new JTextField();
 	JLabel lblNome = new JLabel("Nome: ");
 	
@@ -30,27 +36,36 @@ public class CadPessoas extends JFrame{
 	JButton btnApagar = new JButton("Apagar");
 	
 	public CadPessoas() {
-		super("Cadastro de Usuários");
+		super("Usuários");
 		
 		Container paine = this.getContentPane();
 		
+		paine.add(lblObs);
+		lblObs.setFont(new Font ("Arial", Font.PLAIN, 10));
+		lblObs.setBounds(315, 20, 200, 30);
+		
+		paine.add(lblID);
+		paine.add(txtID);	
+		lblID.setBounds(70, 25, 70, 30);
+		txtID.setBounds(150, 25, 160, 30);
+		
 		paine.add(lblNome);
 		paine.add(txtNome);	
-		lblNome.setBounds(70, 25, 70, 30);
-		txtNome.setBounds(150, 25, 310, 30);
+		lblNome.setBounds(70, 60, 70, 30);
+		txtNome.setBounds(150, 60, 310, 30);	
 		
 		paine.add(lblEmail);
-		paine.add(txtEmail);	
-		lblEmail.setBounds(70, 60, 70, 30);
-		txtEmail.setBounds(150, 60, 310, 30);	
+		paine.add(txtEmail);
+		lblEmail.setBounds(70, 95, 70, 30);
+		txtEmail.setBounds(150, 95, 310, 30);
 		
 		paine.add(lblSexo);
 		paine.add(txtSexo);	
-		lblSexo.setBounds(70, 95, 70, 30);
-		txtSexo.setBounds(150, 95, 310, 30);
+		lblSexo.setBounds(70, 130, 70, 30);
+		txtSexo.setBounds(150, 130, 310, 30);
 		
 		paine.add(btnSalvar);
-		btnSalvar.setBounds(100, 160, 100, 30);
+		btnSalvar.setBounds(100, 190, 100, 30);
 		btnSalvar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -75,12 +90,13 @@ public class CadPessoas extends JFrame{
 		});
 		
 		paine.add(btnEditar);
-		btnEditar.setBounds(220, 160, 100, 30);
+		btnEditar.setBounds(220, 190, 100, 30);
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pessoas pessoas = new Pessoas();
+					pessoas.setId_pessoa(Integer.parseInt(txtID.getText()));
 					pessoas.setNome(txtNome.getText());
 					pessoas.setEmail(txtEmail.getText());
 					pessoas.setSexo(txtSexo.getText());
@@ -88,7 +104,7 @@ public class CadPessoas extends JFrame{
 					Connection connection = JdbUtil.getConnection();
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);
 					
-					pessoasJdbcDAO.update(pessoas);
+					pessoasJdbcDAO.update(pessoas, Integer.parseInt(txtID.getText()));
 					
 					dispose();
 				}
@@ -99,12 +115,13 @@ public class CadPessoas extends JFrame{
 		});
 		
 		paine.add(btnApagar);
-		btnApagar.setBounds(340, 160, 100, 30);
+		btnApagar.setBounds(340, 190, 100, 30);
 		btnApagar.addActionListener(new ActionListener () {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pessoas pessoas = new Pessoas();
+					pessoas.setId_pessoa(Integer.parseInt(txtID.getText()));
 					pessoas.setNome(txtNome.getText());
 					pessoas.setEmail(txtEmail.getText());
 					pessoas.setSexo(txtSexo.getText());
@@ -112,7 +129,7 @@ public class CadPessoas extends JFrame{
 					Connection connection = JdbUtil.getConnection();
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);					
 					
-					pessoasJdbcDAO.delete(pessoas);
+					pessoasJdbcDAO.delete(Integer.parseInt(txtID.getText()));
 					
 					dispose();
 				}

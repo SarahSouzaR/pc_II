@@ -1,6 +1,9 @@
 package controller;
 
 import java.util.List;
+
+import com.mysql.cj.xdevapi.Statement;
+
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import model.Tarefa;
+import model.Pessoas;
 
 public class TarefaJdbcDAO {
 	
@@ -25,16 +29,16 @@ public class TarefaJdbcDAO {
 		prepareStatement.close();
 	}
 	
-	public void update(Tarefa t) throws SQLException {
-		String sql = "update tb_tarefa set titulo='"+t.getTitulo()+"', prazo_estimado='"+t.getPrazo_estimado()+"', descricao='"+t.getDescricao()+"', dt_inicio='"+t.getDt_inicio()+"', dt_termino='"+t.getDt_termino()+"' where titulo='"+t.getTitulo()+"';";
+	public void update(Tarefa t, Integer id) throws SQLException {
+		String sql = "update tb_tarefa set titulo='"+t.getTitulo()+"', prazo_estimado='"+t.getPrazo_estimado()+"', descricao='"+t.getDescricao()+"', dt_inicio='"+t.getDt_inicio()+"', dt_termino='"+t.getDt_termino()+"' where id_tarefa='"+t.getId_tarefa()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(Tarefa t) throws SQLException {
-		String sql = "delete from tb_tarefa where titulo='"+t.getTitulo()+"';";
+	public void delete(Integer id) throws SQLException {
+		String sql = "delete from tb_tarefa where id_tarefa='"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

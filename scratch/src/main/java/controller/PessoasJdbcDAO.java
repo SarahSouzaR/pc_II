@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 
 import model.Pessoas;
+import model.Tarefa;
 
 public class PessoasJdbcDAO {
 
@@ -25,16 +26,35 @@ public class PessoasJdbcDAO {
 		prepareStatement.close();
 	}
 	
-	public void update(Pessoas p) throws SQLException {
-		String sql = "update tb_pessoas set nome='"+p.getNome()+"', email='"+p.getEmail()+"', sexo='"+p.getSexo()+"' where email='"+p.getEmail()+"';";
+	//método do select
+		public ResultSet select(int id) throws SQLException{
+			String sql = "select id_pessoa from tb_pessoas where id_pessoa = '"+id+"'";
+			System.out.println(sql);
+			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
+			ResultSet rs = prepareStatement.executeQuery(sql);
+			
+			/*
+			while (rs.next()) {
+				Integer id_pessoa = rs.getInt("id_pessoa");
+				//Integer id_tarefa = rs.getInt("id_tarefa");
+			}
+			*/
+			
+			prepareStatement.close();
+			
+			return rs;
+		}		
+		
+	public void update(Pessoas p, Integer id) throws SQLException {
+		String sql = "update tb_pessoas set nome='"+p.getNome()+"', email='"+p.getEmail()+"', sexo='"+p.getSexo()+"' where id_pessoa='"+p.getId_pessoa()+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();
 		prepareStatement.close();
 	}
 	
-	public void delete(Pessoas p) throws SQLException {
-		String sql = "delete from tb_pessoas where email='"+p.getEmail()+"';";
+	public void delete(Integer id) throws SQLException {
+		String sql = "delete from tb_pessoas where id_pessoa='"+id+"';";
 		System.out.println(sql);
 		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 		prepareStatement.executeUpdate();

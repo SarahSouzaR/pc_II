@@ -24,7 +24,7 @@ public class JanelaPrincipal extends JFrame {
 				Image img = ImageIO.read(new java.net.URL(
 						this.getClass().getResource("imagens/desktop.gif"), "desktop.gif"));
 				if(img!=null) {
-					g.drawImage(img, 0, 0, 800, 600, this);
+					g.drawImage(img, 0, 0, 338, 338, this);
 				}
 			}
 			catch(Exception e) {
@@ -32,7 +32,6 @@ public class JanelaPrincipal extends JFrame {
 			}
 		}
 	};
-	//Tela telaCadUsuarios, telaCadTarefas, telaCadTime;
 	
 	//Barra do menu
 	JMenuBar barra = new JMenuBar();
@@ -44,17 +43,17 @@ public class JanelaPrincipal extends JFrame {
 	JMenu menuTime = new JMenu("Times");//exibe a lista de times
 	
 	//Itens dos componentes	
-	JMenuItem cadPessoa = new JMenuItem("Cadastrar Usuário");//cadastra pessoa
-	JMenuItem listPessoas = new JMenuItem("Lista de Usuários");//exibe a lista de pessoas
+	JMenuItem cadPessoa = new JMenuItem("Cadastrar Usuários");//cadastra pessoa
+	//JMenuItem listPessoas = new JMenuItem("Lista de Usuários");//exibe a lista de pessoas
 	
 	JMenuItem cadTarefa = new JMenuItem("Inserir Tarefa");
-	JMenuItem listTarefas = new JMenuItem("Lista de Tarefas");
+	//JMenuItem listTarefas = new JMenuItem("Lista de Tarefas");
 	
 	JMenuItem cadMetodologia = new JMenuItem("Inserir Metodologia");
-	JMenuItem listMetodologias = new JMenuItem("Lista de Metodologias");
+	//JMenuItem listMetodologias = new JMenuItem("Lista de Metodologias");
 	
 	JMenuItem cadTime = new JMenuItem("Entrar em um Time");
-	JMenuItem listTimes = new JMenuItem("Lista de Times");
+	//JMenuItem listTimes = new JMenuItem("Lista de Times");
 	
 	public JanelaPrincipal() {	
 		super ("Scratch Out - Gerenciador de Tarefas");
@@ -69,12 +68,14 @@ public class JanelaPrincipal extends JFrame {
 		barra.add(menuMetodologia);
 		barra.add(menuTime);
 				
+		/*
 		menuPessoas.add(listPessoas);
 		listPessoas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//instancia a janela da lista de usuários
 			}
 		});
+		*/
 		
 		menuPessoas.add(cadPessoa);
 		cadPessoa.addActionListener(new ActionListener() {
@@ -84,12 +85,14 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 		
+		/*
 		menuTarefas.add(listTarefas);
 		listTarefas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//instancia a janela da lista de tarefas
 			}
 		});
+		*/
 		
 		menuTarefas.add(cadTarefa);
 		cadTarefa.addActionListener(new ActionListener() {
@@ -99,12 +102,14 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 				
+		/*
 		menuMetodologia.add(listMetodologias);
 		listMetodologias.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//instancia a janela da lista de metodologias
 			}
 		});
+		*/
 		
 		menuMetodologia.add(cadMetodologia);
 		cadMetodologia.addActionListener(new ActionListener () {
@@ -114,12 +119,14 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 		
+		/*
 		menuTime.add(listTimes);
 		listTimes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//instancia a janela da lista de times
 			}
 		});
+		*/
 		
 		menuTime.add(cadTime);
 		cadTime.addActionListener(new ActionListener () {
