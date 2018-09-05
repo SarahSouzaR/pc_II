@@ -120,13 +120,14 @@ public class CadTarefas extends JFrame {
 					PessoasJdbcDAO pVerificar = new PessoasJdbcDAO(connection);
 					pVerificar.select(Integer.parseInt(txtIDUser.getText()));
 					
-					if (pVerificar.select(rs == (Integer.parseInt(txtIDUser.getText())))) {
+					
+					//if (pVerificar.select(rs == (Integer.parseInt(txtIDUser.getText())))) {
 						String sql = "insert into tarefa_participantes (id_pessoa, id_tarefa) values ('"+txtIDUser.getText()+"', '"+txtID.getText()+"')";
 						System.out.println(sql);
 						PreparedStatement prepareStatement = connection.prepareStatement(sql);
 						prepareStatement.executeUpdate();
 						prepareStatement.close();
-					}
+				//	}
 					
 					//pessoasJdbcDAO.select(Integer.parseInt(txtID.getText()));
 					
@@ -137,6 +138,7 @@ public class CadTarefas extends JFrame {
 				}
 			}
 		});
+		
 		
 		paine.add(btnEditar);
 		btnEditar.setBounds(220, 380, 100, 30);

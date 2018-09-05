@@ -6,8 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.JFrame;
 
@@ -27,6 +30,10 @@ public class CadPessoas extends JFrame{
 	
 	JTextField txtEmail = new JTextField();
 	JLabel lblEmail = new JLabel("E-mail: ");
+	
+	JRadioButton rbMasc = new JRadioButton("Masculino");
+	JRadioButton rbFem = new JRadioButton("Feminino");
+	ButtonGroup gpSexo = new ButtonGroup();
 	
 	JTextField txtSexo = new JTextField();
 	JLabel lblSexo = new JLabel("Sexo: ");
@@ -59,10 +66,16 @@ public class CadPessoas extends JFrame{
 		lblEmail.setBounds(70, 95, 70, 30);
 		txtEmail.setBounds(150, 95, 310, 30);
 		
+		gpSexo.add(rbMasc);
+		gpSexo.add(rbFem);
+		paine.add(rbMasc);
+		paine.add(rbFem);
+		rbMasc.setBounds(150, 130, 100, 30);
+		rbFem.setBounds(260, 130, 100, 30);
+		
 		paine.add(lblSexo);
-		paine.add(txtSexo);	
 		lblSexo.setBounds(70, 130, 70, 30);
-		txtSexo.setBounds(150, 130, 310, 30);
+		
 		
 		paine.add(btnSalvar);
 		btnSalvar.setBounds(100, 190, 100, 30);
@@ -73,7 +86,19 @@ public class CadPessoas extends JFrame{
 					Pessoas pessoas = new Pessoas();
 					pessoas.setNome(txtNome.getText());
 					pessoas.setEmail(txtEmail.getText());
-					pessoas.setSexo(txtSexo.getText());
+					if (gpSexo.getSelection() != null) {
+						String sexo = "";
+						if(rbMasc.isSelected()) {
+							pessoas.setSexo("Masculino");
+						}
+						else {
+							pessoas.setSexo("Feminino");
+						}
+					}
+					else {
+						JOptionPane.showMessageDialog(null, "Preencha todos os campos!, Pessoas");
+					}
+					
 					
 					Connection connection = JdbUtil.getConnection();
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);
@@ -99,7 +124,15 @@ public class CadPessoas extends JFrame{
 					pessoas.setId_pessoa(Integer.parseInt(txtID.getText()));
 					pessoas.setNome(txtNome.getText());
 					pessoas.setEmail(txtEmail.getText());
-					pessoas.setSexo(txtSexo.getText());
+					if (gpSexo.getSelection() != null) {
+						String sexo = "";
+						if(rbMasc.isSelected()) {
+							pessoas.setSexo("Masculino");
+						}
+						else {
+							pessoas.setSexo("Feminino");
+						}
+					}
 					
 					Connection connection = JdbUtil.getConnection();
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);
