@@ -50,9 +50,14 @@ private Connection conn;
 			ResultSet rs = prepareStatement.executeQuery();
 			while(rs.next()) {
 			//int id = rs.getInt("id");
-			String nm_time = rs.getString("nm_time");
-			String id_pessoa = rs.getString("id_pessoa");
-			System.out.println(nm_time + " " + id_pessoa);
+				
+				Time ti = new Time();
+				
+				ti.setId_time(rs.getInt("id_time"));
+				ti.setId_pessoa(rs.getInt("id_pessoa"));
+				ti.setNm_time(rs.getString("nm_time"));
+				
+				time.add(ti);
 			}
 			prepareStatement.close();
 		} 

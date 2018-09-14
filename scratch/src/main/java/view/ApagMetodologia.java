@@ -29,7 +29,7 @@ JLabel lblTitulo = new JLabel("Informe o ID da Metodologia que você deseja apag
 		Container paine = this.getContentPane();
 		paine.setLayout(null);
 		
-		lblTitulo.setBounds(20, 10, 300, 30);
+		lblTitulo.setBounds(20, 10, 320, 30);
 		paine.add(lblTitulo);
 		
 		lblID.setBounds(20, 50, 30, 30);

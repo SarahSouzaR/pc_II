@@ -54,12 +54,18 @@ public class TarefaJdbcDAO {
 			ResultSet rs = prepareStatement.executeQuery();
 			while(rs.next()) {
 			//int id = rs.getInt("id");
-			String titulo = rs.getString("titulo");
-			String prazo_estimado = rs.getString("prazo_estimado");
-			String descricao = rs.getString("descricao");
-			String dt_inicio = rs.getString("dt_inicio ");
-			String dt_termino = rs.getString("dt_termino");
-			System.out.println(titulo + " " + prazo_estimado + " " + descricao + " " + dt_inicio + " " + dt_termino);
+				
+				Tarefa t = new Tarefa();
+				
+				t.setId_tarefa(rs.getInt("id_tarefa"));
+				t.setId_pessoa(rs.getInt("id_pessoa"));
+				t.setTitulo(rs.getString("titulo"));
+				t.setPrazo_estimado(rs.getString("prazo_estimado"));
+				t.setDescricao(rs.getString("descricao"));
+				t.setDt_inicio(rs.getString("dt_inicio"));
+				t.setDt_termino(rs.getString("dt_termino"));
+				
+				tarefa.add(t);
 			}
 			prepareStatement.close();
 		} 

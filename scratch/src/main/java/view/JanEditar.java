@@ -60,15 +60,15 @@ public class JanEditar extends JFrame{
 				}
 				
 				if(rbTarefa.isSelected()) {
-					
+					EditTarefa editar = new EditTarefa();
 				}
 				
 				if(rbMetodologia.isSelected()) {
-					
+					EditMetodologia editar = new EditMetodologia();
 				}
 
 				if(rbTime.isSelected()) {
-	
+					EditTime editar = new EditTime();	
 				}
 				
 			}

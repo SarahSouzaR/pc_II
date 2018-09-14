@@ -66,12 +66,16 @@ public class PessoasJdbcDAO {
 			ResultSet rs = prepareStatement.executeQuery();
 			while(rs.next()) {
 			//int id = rs.getInt("id");
-			String nome = rs.getString("nome");
-			String email = rs.getString("email");
-			String sexo = rs.getString("sexo");
-			System.out.println(nome + " " + email + " " + sexo);
-			}
-			prepareStatement.close();
+				
+				Pessoas p = new Pessoas();
+				p.setId_pessoa(rs.getInt("id_pessoa"));
+				p.setNome(rs.getString("nome"));
+				p.setEmail(rs.getString("email"));
+				p.setSexo(rs.getString("sexo"));
+				
+				pessoas.add(p);
+				}
+				prepareStatement.close();
 		} 
 		catch (SQLException e) {
 			e.printStackTrace();

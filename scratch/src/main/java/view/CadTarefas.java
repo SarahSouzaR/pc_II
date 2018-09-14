@@ -64,12 +64,12 @@ public class CadTarefas extends JFrame {
 		Container paine = this.getContentPane();
 		paine.setLayout(null);
 		
-		/*paine.add(lblComboBox);
+		paine.add(lblComboBox);
 		paine.add(cboUsuario);
 		lblComboBox.setBounds(20, 20, 150, 20);
 		cboUsuario.setBounds(150, 20, 150, 20);
 		
-		cboUsuario.addItem("");*/
+		cboUsuario.addItem("");
 		
 		/*
 		ArrayList<String> pessoas = new ArrayList<String>();
@@ -105,14 +105,14 @@ public class CadTarefas extends JFrame {
 				System.out.println(titulo + " " + prazo_estimado + " " + descricao + " " + dt_inicio + " " + dt_termino);
 			}
 		}
-		*/
 		
-		/*
+		
+		
 		try {
 			Connection connection = JdbUtil.getConnection();
 			PessoasJdbcDAO pessoaJdbcDAO = new PessoasJdbcDAO(connection);
 		
-			List<Pessoa> p = PessoasJdbcDAO.listar();
+			List<Pessoas> p = PessoasJdbcDAO.listar();
 			
 			for(int i = 0; i < p.size(); i++) {
 				cboUsuario.addItem(p.get(i).getNome());

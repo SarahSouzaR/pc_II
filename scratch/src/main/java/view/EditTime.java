@@ -1,7 +1,6 @@
 package view;
 
 import java.awt.Container;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -11,15 +10,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-import controller.TimeJdbcDAO;
 import controller.JdbUtil;
-import controller.PessoasJdbcDAO;
-import model.Pessoas;
+import controller.TimeJdbcDAO;
 import model.Time;
 
-public class CadTime extends JFrame{
+public class EditTime extends JFrame{
 	
-	JLabel lblObs = new JLabel("* somente para times cadastrados");
 	
 	JTextField txtID = new JTextField();
 	JLabel lblID = new JLabel("ID do Time: ");
@@ -29,20 +25,14 @@ public class CadTime extends JFrame{
 	
 	JTextField txtIdPessoa = new JTextField();
 	JLabel lblIdPesooa = new JLabel("ID do Usuário: ");
-
-	JButton btnSalvar = new JButton("Salvar");
-	JButton btnEditar = new JButton("Editar");
 	
+	JButton btnEditar = new JButton("Editar");	
 	
-	public CadTime() {
-		super("Cadastro de Times");
+	public EditTime() {
+		super("Editar - Time");
 		
 		Container paine = this.getContentPane();
 		paine.setLayout(null);
-		
-		paine.add(lblObs);
-		lblObs.setFont(new Font ("Arial", Font.PLAIN, 10));
-		lblObs.setBounds(315, 20, 200, 30);
 		
 		paine.add(lblID);
 		paine.add(txtID);	
@@ -58,29 +48,6 @@ public class CadTime extends JFrame{
 		paine.add(txtIdPessoa);	
 		lblIdPesooa.setBounds(35, 95, 140, 30);
 		txtIdPessoa.setBounds(150, 95, 310, 30);	
-		
-		paine.add(btnSalvar);
-		btnSalvar.setBounds(100, 150, 100, 30);
-		btnSalvar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Time time = new Time();
-					time.setNm_time(txtNome.getText());
-					time.setId_pessoa(Integer.parseInt(txtIdPessoa.getText()));
-					
-					Connection connection = JdbUtil.getConnection();
-					TimeJdbcDAO timeJdbcDAO = new TimeJdbcDAO(connection);
-					
-					timeJdbcDAO.salvar(time);
-					
-					dispose();
-				}
-				catch(Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		});
 		
 		paine.add(btnEditar);
 		btnEditar.setBounds(220, 150, 100, 30);
@@ -109,12 +76,14 @@ public class CadTime extends JFrame{
 		this.setVisible(true);
 		this.setSize(560, 240);
 		this.setResizable(false);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
+		
 	}
-	
-	
+
 	public static void main(String[] args) {
-		CadTime cadTime = new CadTime();
+		EditTime editar = new EditTime();
+
 	}
 
 }

@@ -50,8 +50,12 @@ private Connection conn;
 			ResultSet rs = prepareStatement.executeQuery();
 			while(rs.next()) {
 			//int id = rs.getInt("id");
-			String metodo_nome = rs.getString("metodo_nome");
-			System.out.println(metodo_nome);
+				
+				Metodologia m = new Metodologia();
+				m.setId_metodologia(rs.getInt("id_metodologia"));
+				m.setMetodo_nome(rs.getString("metodo_nome"));
+				
+				metodologia.add(m);
 			}
 			prepareStatement.close();
 		} 
