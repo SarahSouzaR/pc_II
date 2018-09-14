@@ -18,39 +18,25 @@ import model.Metodologia;
 import model.Pessoas;
 
 public class CadMetodologia extends JFrame{
-	
-	JLabel lblObs = new JLabel("* somente para metodologias cadastradas");
-	
-	JTextField txtID = new JTextField();
-	JLabel lblID = new JLabel("ID: ");
-	
+		
 	JTextField txtNome = new JTextField();
 	JLabel lblNome = new JLabel("Metodologia: ");
 	
 	JButton btnSalvar = new JButton("Salvar");
-	JButton btnEditar = new JButton("Editar");
 	
 	public CadMetodologia() {
 		super("Cadastro de Metodologias");
 		
 		Container paine = this.getContentPane();
-		
-		paine.add(lblObs);
-		lblObs.setFont(new Font ("Arial", Font.PLAIN, 10));
-		lblObs.setBounds(315, 20, 200, 30);
-		
-		paine.add(lblID);
-		paine.add(txtID);
-		lblID.setBounds(50, 25, 100, 30);
-		txtID.setBounds(150, 25, 160, 30);
-		
+		this.setLayout(null);
+				
 		paine.add(lblNome);
 		paine.add(txtNome);	
-		lblNome.setBounds(50, 60, 100, 30);
-		txtNome.setBounds(150, 60, 310, 30);
+		lblNome.setBounds(20, 25, 100, 30);
+		txtNome.setBounds(120, 25, 310, 30);
 	
 		paine.add(btnSalvar);
-		btnSalvar.setBounds(100, 115, 100, 30);
+		btnSalvar.setBounds(30, 80, 390, 30);
 		btnSalvar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -70,40 +56,15 @@ public class CadMetodologia extends JFrame{
 				}
 			}
 		});
-		
-		paine.add(btnEditar);
-		btnEditar.setBounds(220, 115, 100, 30);
-		btnEditar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Metodologia metodologia = new Metodologia();
-					metodologia.setId_metodologia(Integer.parseInt(txtID.getText()));;
-					metodologia.setMetodo_nome(txtNome.getText());
-					
-					Connection connection = JdbUtil.getConnection();
-					MetodologiaJdbcDAO metodologiaJdbcDAO = new MetodologiaJdbcDAO(connection);
-					
-					metodologiaJdbcDAO.update(metodologia, Integer.parseInt(txtID.getText()));
-					
-					dispose();
-				}
-				catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		});
 	
-	this.setLayout(null);
 	this.setVisible(true);
-	this.setSize(560, 200);
+	this.setSize(460, 180);
 	this.setResizable(false);
-	this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		
+	this.setLocationRelativeTo(null);
+	this.setDefaultCloseOperation(HIDE_ON_CLOSE);		
 	}
 	
 	public static void main(String[] args) {
 		CadMetodologia cadMetodologia = new CadMetodologia();
 	}
-
 }

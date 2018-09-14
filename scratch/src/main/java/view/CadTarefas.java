@@ -31,14 +31,9 @@ public class CadTarefas extends JFrame {
 
 	JLabel lblComboBox = new JLabel("Selecione o usuário: ");
 	JComboBox cboUsuario = new JComboBox();
-		
-	JLabel lblObs = new JLabel("* somente para tarefas cadastradas");
 	
 	JTextField txtID = new JTextField();
 	JLabel lblID = new JLabel("ID da Tarefa: ");
-	
-	JTextField txtIDUser = new JTextField();
-	JLabel lblIDUser = new JLabel("ID do Usuário: ");
 	
 	JLabel lblTitulo = new JLabel("Título: ");
 	JTextField txtTitulo = new JTextField();
@@ -66,8 +61,8 @@ public class CadTarefas extends JFrame {
 		
 		paine.add(lblComboBox);
 		paine.add(cboUsuario);
-		lblComboBox.setBounds(20, 20, 150, 20);
-		cboUsuario.setBounds(150, 20, 150, 20);
+		lblComboBox.setBounds(20, 20, 150, 30);
+		cboUsuario.setBounds(150, 20, 150, 30);
 		
 		cboUsuario.addItem("");
 		
@@ -83,18 +78,7 @@ public class CadTarefas extends JFrame {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		/*
-		paine.add(lblObs);
-		lblObs.setFont(new Font ("Arial", Font.PLAIN, 10));
-		lblObs.setBounds(315, 20, 200, 30);
-		
-		paine.add(lblID);
-		paine.add(txtID);	
-		lblID.setBounds(20, 25, 140, 30);
-		txtID.setBounds(150, 25, 160, 30);
-		*/
-		
+				
 		paine.add(lblTitulo);
 		paine.add(txtTitulo);
 		lblTitulo.setBounds(20, 60, 140, 30);
@@ -120,13 +104,8 @@ public class CadTarefas extends JFrame {
 		lblDtTermino.setBounds(20, 285, 140, 30);
 		txtDtTermino.setBounds(150, 285, 310, 30);
 		
-		paine.add(lblIDUser);
-		paine.add(txtIDUser);
-		lblIDUser.setBounds(20, 320, 140, 30);
-		txtIDUser.setBounds(150, 320, 160, 30);
-		
 		paine.add(btnSalvar);
-		btnSalvar.setBounds(100, 380, 100, 30);
+		btnSalvar.setBounds(40, 345, 400, 30);
 		btnSalvar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -156,7 +135,8 @@ public class CadTarefas extends JFrame {
 		});
 	
 		this.setVisible(true);
-		this.setSize(550, 480);
+		this.setSize(490, 450);
+		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);		
 	}

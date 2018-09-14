@@ -16,24 +16,7 @@ import javax.swing.JMenuItem;
 public class JanelaPrincipal extends JFrame {
 	
 	//Janela que recebe a barra de menu e abre as outras janelas dentro
-	JDesktopPane jdPane = new JDesktopPane() {
-		/*
-		public void paintComponent(Graphics g) {
-			try {
-				super.paintComponents(g);
-				
-				Image img = ImageIO.read(new java.net.URL(
-						this.getClass().getResource("imagens/desktop.gif"), "desktop.gif"));
-				if(img!=null) {
-					g.drawImage(img, 0, 0, 338, 338, this);
-				}
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		*/
-	};
+	JDesktopPane jdPane = new JDesktopPane();
 	
 	//Barra do menu
 	JMenuBar barra = new JMenuBar();
