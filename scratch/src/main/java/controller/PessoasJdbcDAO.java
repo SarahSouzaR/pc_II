@@ -32,14 +32,10 @@ public class PessoasJdbcDAO {
 			System.out.println(sql);
 			PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
 			ResultSet rs = prepareStatement.executeQuery(sql);
-			
-			/*
 			while (rs.next()) {
 				Integer id_pessoa = rs.getInt("id_pessoa");
 				//Integer id_tarefa = rs.getInt("id_tarefa");
 			}
-			*/
-			
 			prepareStatement.close();
 			
 			return rs;

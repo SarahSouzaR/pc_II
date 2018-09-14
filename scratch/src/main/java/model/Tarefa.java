@@ -3,13 +3,21 @@ package model;
 public class Tarefa {
 
 	private Integer id_tarefa;
+	private Integer id_pessoa;
 	private String titulo;
 	private String prazo_estimado;
 	private String descricao;
 	private String dt_inicio;
 	private String dt_termino;
 	
-	
+	public Integer getId_pessoa() {
+		return id_pessoa;
+	}
+
+	public void setId_pessoa(Integer id_pessoa) {
+		this.id_pessoa = id_pessoa;
+	}
+
 	public Integer getId_tarefa() {
 		return id_tarefa;
 	}

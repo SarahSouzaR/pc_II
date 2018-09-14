@@ -22,7 +22,7 @@ public class JanelaPrincipal extends JFrame {
 				super.paintComponents(g);
 				
 				Image img = ImageIO.read(new java.net.URL(
-						this.getClass().getResource("imagens/desktop.gif"), "desktop.gif"));
+						this.getClass().getResource("imagens/desktop.jpg"), "desktop.jpg"));
 				if(img!=null) {
 					g.drawImage(img, 0, 0, 338, 338, this);
 				}
@@ -41,6 +41,7 @@ public class JanelaPrincipal extends JFrame {
 	JMenu menuTarefas = new JMenu("Tarefas");//exibe a lista de tarefas
 	JMenu menuMetodologia = new JMenu("Metodologias");//exibe a lista de metodologias
 	JMenu menuTime = new JMenu("Times");//exibe a lista de times
+	JMenu menuEditarApagar = new JMenu("Editar/Apagar");
 	
 	//Itens dos componentes	
 	JMenuItem cadPessoa = new JMenuItem("Cadastrar Usuários");//cadastra pessoa
@@ -55,6 +56,8 @@ public class JanelaPrincipal extends JFrame {
 	JMenuItem cadTime = new JMenuItem("Entrar em um Time");
 	//JMenuItem listTimes = new JMenuItem("Lista de Times");
 	
+	JMenuItem editar = new JMenuItem("Alteração");
+	
 	public JanelaPrincipal() {	
 		super ("Scratch Out - Gerenciador de Tarefas");
 		
@@ -67,6 +70,7 @@ public class JanelaPrincipal extends JFrame {
 		barra.add(menuTarefas);
 		barra.add(menuMetodologia);
 		barra.add(menuTime);
+		barra.add(menuEditarApagar);
 				
 		/*
 		menuPessoas.add(listPessoas);
@@ -76,6 +80,13 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 		*/
+		
+		menuEditarApagar.add(editar);
+		editar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JanEditar edit = new JanEditar();
+			}
+		});
 		
 		menuPessoas.add(cadPessoa);
 		cadPessoa.addActionListener(new ActionListener() {
@@ -137,7 +148,7 @@ public class JanelaPrincipal extends JFrame {
 		});
 		
 		this.setVisible(true);
-		this.setSize(800, 600);
+		this.setSize(600, 300);
 		this.setLayout(null);
 		this.setResizable(false);
 	}
