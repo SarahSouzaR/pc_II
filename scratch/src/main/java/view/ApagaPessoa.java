@@ -4,8 +4,10 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -21,6 +23,8 @@ public class ApagaPessoa extends JFrame{
 	JLabel lblID = new JLabel("ID: ");
 	JTextField txtID = new JTextField();
 	
+	JComboBox cboPessoa = new JComboBox();
+	
 	JButton btnApagar = new JButton("Apagar");
 	
 	public ApagaPessoa() {
@@ -34,8 +38,25 @@ public class ApagaPessoa extends JFrame{
 		
 		lblID.setBounds(20, 50, 30, 30);
 		paine.add(lblID);
-		txtID.setBounds(60, 50, 120, 30);
-		paine.add(txtID);
+		
+		cboPessoa.setBounds(60, 50, 150, 30);
+		paine.add(cboPessoa);
+		//txtID.setBounds(60, 50, 120, 30);
+		cboPessoa.addItem("");
+		
+		try {
+			Connection connection = JdbUtil.getConnection();
+			PessoasJdbcDAO p = new PessoasJdbcDAO(connection);
+			
+			List<Pessoas> pessoa = p.listar();
+			
+			for(int i=0; i<pessoa.size(); i++) {
+				cboPessoa.addItem(pessoa.get(i).getId_pessoa());
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 		btnApagar.setBounds(40, 100, 260, 30);
 		paine.add(btnApagar);
@@ -44,12 +65,12 @@ public class ApagaPessoa extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pessoas pessoas = new Pessoas();
-					pessoas.setId_pessoa(Integer.parseInt(txtID.getText()));
+					pessoas.setId_pessoa(Integer.parseInt(cboPessoa.getSelectedItem().toString()));
 										
 					Connection connection = JdbUtil.getConnection();
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);					
 					
-					pessoasJdbcDAO.delete(Integer.parseInt(txtID.getText()));
+					pessoasJdbcDAO.delete(Integer.parseInt(cboPessoa.getSelectedItem().toString()));
 					
 					dispose();
 				}
