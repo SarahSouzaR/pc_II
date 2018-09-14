@@ -17,12 +17,13 @@ public class JanelaPrincipal extends JFrame {
 	
 	//Janela que recebe a barra de menu e abre as outras janelas dentro
 	JDesktopPane jdPane = new JDesktopPane() {
+		/*
 		public void paintComponent(Graphics g) {
 			try {
 				super.paintComponents(g);
 				
 				Image img = ImageIO.read(new java.net.URL(
-						this.getClass().getResource("imagens/desktop.jpg"), "desktop.jpg"));
+						this.getClass().getResource("imagens/desktop.gif"), "desktop.gif"));
 				if(img!=null) {
 					g.drawImage(img, 0, 0, 338, 338, this);
 				}
@@ -31,6 +32,7 @@ public class JanelaPrincipal extends JFrame {
 				e.printStackTrace();
 			}
 		}
+		*/
 	};
 	
 	//Barra do menu
@@ -71,6 +73,45 @@ public class JanelaPrincipal extends JFrame {
 		barra.add(menuMetodologia);
 		barra.add(menuTime);
 		barra.add(menuEditarApagar);
+						
+		menuPessoas.add(cadPessoa);
+		cadPessoa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//instância da janela que abre o cadastro das pessoas;
+				CadPessoas cadPessoas = new CadPessoas();
+			}
+		});
+		
+		menuTarefas.add(cadTarefa);
+		cadTarefa.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//instancia da janela de tarefas
+				CadTarefas cadTarefas = new CadTarefas();
+			}
+		});
+		
+		menuMetodologia.add(cadMetodologia);
+		cadMetodologia.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				//instancia da janela de metodologias
+				CadMetodologia cadMetodologia = new CadMetodologia();
+			}
+		});
+		
+		menuTime.add(cadTime);
+		cadTime.addActionListener(new ActionListener () {
+			public void actionPerformed(ActionEvent e) {
+				//instancia da janela de Times
+				CadTime cadTime = new CadTime();
+			}
+		});
+		
+		menuEditarApagar.add(editar);
+		editar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JanEditar edit = new JanEditar();
+			}
+		});
 				
 		/*
 		menuPessoas.add(listPessoas);
@@ -81,21 +122,6 @@ public class JanelaPrincipal extends JFrame {
 		});
 		*/
 		
-		menuEditarApagar.add(editar);
-		editar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				JanEditar edit = new JanEditar();
-			}
-		});
-		
-		menuPessoas.add(cadPessoa);
-		cadPessoa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//instância da janela que abre o cadastro das pessoas;
-				CadPessoas cadPessoas = new CadPessoas();
-			}
-		});
-		
 		/*
 		menuTarefas.add(listTarefas);
 		listTarefas.addActionListener(new ActionListener() {
@@ -104,15 +130,7 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 		*/
-		
-		menuTarefas.add(cadTarefa);
-		cadTarefa.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//instancia da janela de tarefas
-				CadTarefas cadTarefas = new CadTarefas();
-			}
-		});
-				
+						
 		/*
 		menuMetodologia.add(listMetodologias);
 		listMetodologias.addActionListener(new ActionListener() {
@@ -121,15 +139,7 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 		*/
-		
-		menuMetodologia.add(cadMetodologia);
-		cadMetodologia.addActionListener(new ActionListener () {
-			public void actionPerformed(ActionEvent e) {
-				//instancia da janela de metodologias
-				CadMetodologia cadMetodologia = new CadMetodologia();
-			}
-		});
-		
+				
 		/*
 		menuTime.add(listTimes);
 		listTimes.addActionListener(new ActionListener() {
@@ -138,18 +148,10 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 		*/
-		
-		menuTime.add(cadTime);
-		cadTime.addActionListener(new ActionListener () {
-			public void actionPerformed(ActionEvent e) {
-				//instancia da janela de Times
-				CadTime cadTime = new CadTime();
-			}
-		});
-		
+				
 		this.setVisible(true);
 		this.setSize(600, 300);
-		this.setLayout(null);
+		this.setLocationRelativeTo(null);
 		this.setResizable(false);
 	}
 	

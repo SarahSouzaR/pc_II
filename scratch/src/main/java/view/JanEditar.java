@@ -99,7 +99,7 @@ public class JanEditar extends JFrame{
 		this.setVisible(true);
 		this.setSize(290, 200);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 	}
 	

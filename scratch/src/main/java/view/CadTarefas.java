@@ -2,7 +2,6 @@ package view;
 
 import java.awt.Container;
 import java.awt.Font;
-import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -10,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -25,6 +25,7 @@ import controller.JdbUtil;
 import controller.PessoasJdbcDAO;
 import model.Pessoas;
 import model.Tarefa;
+
 
 public class CadTarefas extends JFrame {
 
@@ -56,7 +57,6 @@ public class CadTarefas extends JFrame {
 	JTextField txtDtTermino = new JTextField();
 	
 	JButton btnSalvar = new JButton("Salvar");
-	JButton btnEditar = new JButton("Editar");
 	
 	public CadTarefas() {
 		super("Cadastro de Tarefas");
@@ -71,57 +71,20 @@ public class CadTarefas extends JFrame {
 		
 		cboUsuario.addItem("");
 		
-		/*
-		ArrayList<String> pessoas = new ArrayList<String>();
-		
-		public static void GerandoCB() {
-			try {
-				pessoas.clear();
-				
-				cboUsuario.removeAllItems();
-				
-				Statement statement;
-				ResultSet rs = statement.executeQuery("select * from tb_pessoas");
-				
-				while (rs.next()) {
-					ResultSet resultSet;
-					pessoas.add(resultSet.getString("pessoas"));
-				}
-				
-				for (String p : pessoas) {
-					cboUsuario.addItem(p);
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			ResultSet rs;
-			if (rs.next()) {
-				String titulo = rs.getString("titulo");
-				String prazo_estimado = rs.getString("prazo_estimado");
-				String descricao = rs.getString("descricao");
-				String dt_inicio = rs.getString("dt_inicio ");
-				String dt_termino = rs.getString("dt_termino");
-				System.out.println(titulo + " " + prazo_estimado + " " + descricao + " " + dt_inicio + " " + dt_termino);
-			}
-		}
-		
-		
-		
 		try {
 			Connection connection = JdbUtil.getConnection();
-			PessoasJdbcDAO pessoaJdbcDAO = new PessoasJdbcDAO(connection);
-		
-			List<Pessoas> p = PessoasJdbcDAO.listar();
+			PessoasJdbcDAO pessoa1 = new PessoasJdbcDAO(connection);
 			
-			for(int i = 0; i < p.size(); i++) {
-				cboUsuario.addItem(p.get(i).getNome());
+			List<Pessoas> people = pessoa1.listar();
+			
+			for(int i=0; i<people.size(); i++) {
+				cboUsuario.addItem(people.get(i).getId_pessoa());
 			}
-		} catch(Exception e ) {
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		*/
 		
+		/*
 		paine.add(lblObs);
 		lblObs.setFont(new Font ("Arial", Font.PLAIN, 10));
 		lblObs.setBounds(315, 20, 200, 30);
@@ -130,6 +93,7 @@ public class CadTarefas extends JFrame {
 		paine.add(txtID);	
 		lblID.setBounds(20, 25, 140, 30);
 		txtID.setBounds(150, 25, 160, 30);
+		*/
 		
 		paine.add(lblTitulo);
 		paine.add(txtTitulo);
@@ -169,68 +133,23 @@ public class CadTarefas extends JFrame {
 				try {
 					Pessoas pessoas = new Pessoas();
 					Tarefa tarefa = new Tarefa();
-					tarefa.setId_pessoa(Integer.parseInt(txtIDUser.getText()));
-					tarefa.setTitulo(txtTitulo.getText());
-					tarefa.setPrazo_estimado(txtPrazoEstimado.getText());
-					tarefa.setDescricao(txtDescricao.getText());
-					tarefa.setDt_inicio(txtDtInicio.getText());
-					tarefa.setDt_termino(txtDtTermino.getText());
-									
+					
 					Connection connection = JdbUtil.getConnection();
 					TarefaJdbcDAO tarefaJdbcDAO = new TarefaJdbcDAO(connection);
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);
 					
-					tarefaJdbcDAO.salvar(tarefa);
-					
-					//verificando existência de usuário
-					PessoasJdbcDAO pVerificar = new PessoasJdbcDAO(connection);
-					pVerificar.select(Integer.parseInt(txtIDUser.getText()));
-					
-					
-					//if (pVerificar.select(rs == (Integer.parseInt(txtIDUser.getText())))) {
-					
-						//-------------------- colocar o insert aqui -----------------------------------------
-							/*
-							String sql = "insert into tarefa_participantes (id_pessoa, id_tarefa) values ('"+txtIDUser.getText()+"', '"+txtID.getText()+"')";
-							System.out.println(sql);
-							PreparedStatement prepareStatement = connection.prepareStatement(sql);
-							prepareStatement.executeUpdate();
-							prepareStatement.close();
-							*/
-				//	}
-					
-					//pessoasJdbcDAO.select(Integer.parseInt(txtID.getText()));
-					
-					dispose();
-				}
-				catch(Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-		});
-		
-		paine.add(btnEditar);
-		btnEditar.setBounds(220, 380, 100, 30);
-		btnEditar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					Tarefa tarefa = new Tarefa();
-					tarefa.setId_tarefa(Integer.parseInt(txtID.getText()));
+					tarefa.setId_pessoa(Integer.parseInt(cboUsuario.getSelectedItem().toString()));
 					tarefa.setTitulo(txtTitulo.getText());
 					tarefa.setPrazo_estimado(txtPrazoEstimado.getText());
 					tarefa.setDescricao(txtDescricao.getText());
 					tarefa.setDt_inicio(txtDtInicio.getText());
 					tarefa.setDt_termino(txtDtTermino.getText());
-					
-					Connection connection = JdbUtil.getConnection();
-					TarefaJdbcDAO tarefaJdbcDAO = new TarefaJdbcDAO(connection);
-					
-					tarefaJdbcDAO.update(tarefa, Integer.parseInt(txtID.getText()));
-					
+										
+					tarefaJdbcDAO.salvar(tarefa);
+										
 					dispose();
 				}
-				catch (Exception ex) {
+				catch(Exception ex) {
 					ex.printStackTrace();
 				}
 			}
@@ -239,13 +158,7 @@ public class CadTarefas extends JFrame {
 		this.setVisible(true);
 		this.setSize(550, 480);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
-		this.setResizable(false);
-		
-	}
-	
-	private void GerandoCB() {
-		// TODO Auto-generated method stub
-		
+		this.setResizable(false);		
 	}
 
 	public static void main(String[] args) {
