@@ -4,9 +4,11 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -19,8 +21,8 @@ import model.Pessoas;
 
 public class EditPessoa extends JFrame{
 	
-	JTextField txtID = new JTextField();
 	JLabel lblID = new JLabel("ID da Pessoa: ");
+	JComboBox cboUsuario = new JComboBox();
 	
 	JTextField txtNome = new JTextField();
 	JLabel lblNome = new JLabel("Nome: ");
@@ -43,10 +45,24 @@ public class EditPessoa extends JFrame{
 		Container paine = this.getContentPane();
 		paine.setLayout(null);
 		
+		paine.add(cboUsuario);
 		paine.add(lblID);
-		paine.add(txtID);	
 		lblID.setBounds(30, 10, 100, 30);
-		txtID.setBounds(30, 40, 130, 30);
+		cboUsuario.setBounds(30, 40, 160, 30);
+		cboUsuario.addItem("");
+		
+		try {
+			Connection connection = JdbUtil.getConnection();
+			PessoasJdbcDAO p1 = new PessoasJdbcDAO(connection);
+			
+			List<Pessoas> people = p1.listar();
+			
+			for(int i = 0; i < people.size(); i++) {
+				cboUsuario.addItem(people.get(i).getId_pessoa());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		paine.add(lblNome);
 		paine.add(txtNome);	
@@ -75,7 +91,7 @@ public class EditPessoa extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Pessoas pessoas = new Pessoas();
-					pessoas.setId_pessoa(Integer.parseInt(txtID.getText()));
+					pessoas.setId_pessoa(Integer.parseInt(cboUsuario.getSelectedItem().toString()));
 					pessoas.setNome(txtNome.getText());
 					pessoas.setEmail(txtEmail.getText());
 					if (gpSexo.getSelection() != null) {
@@ -91,7 +107,7 @@ public class EditPessoa extends JFrame{
 					Connection connection = JdbUtil.getConnection();
 					PessoasJdbcDAO pessoasJdbcDAO = new PessoasJdbcDAO(connection);
 					
-					pessoasJdbcDAO.update(pessoas, Integer.parseInt(txtID.getText()));
+					pessoasJdbcDAO.update(pessoas, Integer.parseInt(cboUsuario.getSelectedItem().toString()));
 					
 					dispose();
 				}

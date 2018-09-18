@@ -4,8 +4,10 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -13,15 +15,17 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import controller.JdbUtil;
+import controller.PessoasJdbcDAO;
 import controller.TarefaJdbcDAO;
+import model.Pessoas;
 import model.Tarefa;
 
 public class EditTarefa extends JFrame{
 	
-	JTextField txtID = new JTextField();
 	JLabel lblID = new JLabel("ID da Tarefa: ");
+	JComboBox cboTarefa = new JComboBox();
 	
-	JTextField txtIDUser = new JTextField();
+	JComboBox cboIDUser = new JComboBox();
 	JLabel lblIDUser = new JLabel("ID do Usuário: ");
 	
 	JLabel lblTitulo = new JLabel("Título: ");
@@ -48,11 +52,24 @@ public class EditTarefa extends JFrame{
 		Container paine = this.getContentPane();
 		paine.setLayout(null);
 		
+		paine.add(cboTarefa);
 		paine.add(lblID);
-		paine.add(txtID);	
 		lblID.setBounds(20, 25, 140, 30);
-		txtID.setBounds(150, 25, 160, 30);
+		cboTarefa.setBounds(150, 25, 160, 25);
+		cboTarefa.addItem("");
 		
+		try {
+			Connection connection = JdbUtil.getConnection();
+			TarefaJdbcDAO t1 = new TarefaJdbcDAO(connection);
+			
+			List<Tarefa> task = t1.listar();
+			
+			for (int i = 0; i<task.size(); i++) {
+				cboTarefa.addItem(task.get(i).getId_tarefa());
+			}
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 		paine.add(lblTitulo);
 		paine.add(txtTitulo);
 		lblTitulo.setBounds(20, 60, 140, 30);
@@ -79,19 +96,33 @@ public class EditTarefa extends JFrame{
 		txtDtTermino.setBounds(150, 285, 310, 30);
 		
 		paine.add(lblIDUser);
-		paine.add(txtIDUser);
+		paine.add(cboIDUser);
 		lblIDUser.setBounds(20, 320, 140, 30);
-		txtIDUser.setBounds(150, 320, 160, 30);
+		cboIDUser.setBounds(150, 325, 160, 25);
+		cboIDUser.addItem("");
+		
+		try {
+			Connection connection = JdbUtil.getConnection();
+			PessoasJdbcDAO p1 = new PessoasJdbcDAO(connection);
+			
+			List<Pessoas> people = p1.listar();
+			
+			for(int i = 0; i < people.size(); i++) {
+				cboIDUser.addItem(people.get(i).getId_pessoa());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		paine.add(btnEditar);
-		btnEditar.setBounds(220, 380, 100, 30);
+		btnEditar.setBounds(40, 375, 410, 30);
 		btnEditar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Tarefa tarefa = new Tarefa();
-					tarefa.setId_tarefa(Integer.parseInt(txtID.getText()));
-					tarefa.setId_pessoa(Integer.parseInt(txtIDUser.getText()));
+					tarefa.setId_tarefa(Integer.parseInt(cboTarefa.getSelectedItem().toString()));
+					tarefa.setId_pessoa(Integer.parseInt(cboIDUser.getSelectedItem().toString()));
 					tarefa.setTitulo(txtTitulo.getText());
 					tarefa.setPrazo_estimado(txtPrazoEstimado.getText());
 					tarefa.setDescricao(txtDescricao.getText());
@@ -101,7 +132,7 @@ public class EditTarefa extends JFrame{
 					Connection connection = JdbUtil.getConnection();
 					TarefaJdbcDAO tarefaJdbcDAO = new TarefaJdbcDAO(connection);
 					
-					tarefaJdbcDAO.update(tarefa, Integer.parseInt(txtID.getText()));
+					tarefaJdbcDAO.update(tarefa, Integer.parseInt(cboTarefa.getSelectedItem().toString()));
 					
 					dispose();
 				}
@@ -112,7 +143,7 @@ public class EditTarefa extends JFrame{
 		});
 	
 		this.setVisible(true);
-		this.setSize(550, 480);
+		this.setSize(490, 465);
 		this.setDefaultCloseOperation(HIDE_ON_CLOSE);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
