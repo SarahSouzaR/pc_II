@@ -82,4 +82,22 @@ public class PessoasJdbcDAO {
 		}
 		return pessoas;
 	}
+	
+	public String[] infPessoa(Object id) throws SQLException {
+		String sql = "select * from tb_pessoas where id_pessoa = '"+id+"' ";
+		System.out.println(sql);
+		PreparedStatement prepareStatement = this.conn.prepareStatement(sql);
+		ResultSet rs = prepareStatement.executeQuery();
+		rs.next();
+		String nome = rs.getString("nome");
+		String email = rs.getString("email");
+		String sexo = rs.getString("sexo");
+		
+		String[] inf = {nome, email, sexo};
+		
+		rs.close();
+		prepareStatement.close();
+		
+		return inf;
+	}
 }

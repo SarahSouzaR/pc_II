@@ -62,7 +62,7 @@ public class CadTarefas extends JFrame {
 		paine.add(lblComboBox);
 		paine.add(cboUsuario);
 		lblComboBox.setBounds(20, 20, 150, 30);
-		cboUsuario.setBounds(150, 20, 150, 30);
+		cboUsuario.setBounds(150, 25, 150, 25);
 		
 		cboUsuario.addItem("");
 		

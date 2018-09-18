@@ -30,7 +30,7 @@ public class JanelaPrincipal extends JFrame {
 	
 	//Itens dos componentes	
 	JMenuItem cadPessoa = new JMenuItem("Cadastrar Usuários");//cadastra pessoa
-	//JMenuItem listPessoas = new JMenuItem("Lista de Usuários");//exibe a lista de pessoas
+	JMenuItem listPessoas = new JMenuItem("Lista de Usuários");//exibe a lista de pessoas
 	
 	JMenuItem cadTarefa = new JMenuItem("Inserir Tarefa");
 	//JMenuItem listTarefas = new JMenuItem("Lista de Tarefas");
@@ -96,15 +96,13 @@ public class JanelaPrincipal extends JFrame {
 			}
 		});
 				
-		/*
 		menuPessoas.add(listPessoas);
 		listPessoas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//instancia a janela da lista de usuários
+				ListPessoa lp = new ListPessoa();
 			}
 		});
-		*/
-		
+			
 		/*
 		menuTarefas.add(listTarefas);
 		listTarefas.addActionListener(new ActionListener() {

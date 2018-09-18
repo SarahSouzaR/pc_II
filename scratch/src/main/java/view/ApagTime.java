@@ -4,8 +4,10 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,7 +21,7 @@ public class ApagTime extends JFrame{
 JLabel lblTitulo = new JLabel("Informe o ID do Time que você deseja apagar: ");
 	
 	JLabel lblID = new JLabel("ID: ");
-	JTextField txtID = new JTextField();
+	JComboBox cboTime = new JComboBox();
 	
 	JButton btnApagar = new JButton("Apagar");
 	
@@ -34,8 +36,23 @@ JLabel lblTitulo = new JLabel("Informe o ID do Time que você deseja apagar: ");
 		
 		lblID.setBounds(20, 50, 30, 30);
 		paine.add(lblID);
-		txtID.setBounds(60, 50, 120, 30);
-		paine.add(txtID);
+		cboTime.setBounds(60, 50, 120, 30);
+		paine.add(cboTime);
+		cboTime.addItem("");
+		
+		try {
+			Connection connection = JdbUtil.getConnection();
+			TimeJdbcDAO t = new TimeJdbcDAO(connection);
+			
+			List<Time> time = t.listar();
+			
+			for (int i=0; i<time.size(); i++) {
+				cboTime.addItem(time.get(i).getId_time());
+			}
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		btnApagar.setBounds(40, 100, 260, 30);
 		paine.add(btnApagar);
@@ -44,12 +61,12 @@ JLabel lblTitulo = new JLabel("Informe o ID do Time que você deseja apagar: ");
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Time time = new Time();
-					time.setId_time(Integer.parseInt(txtID.getText()));;
-										
+					time.setId_time(Integer.parseInt(cboTime.getSelectedItem().toString()));
+					
 					Connection connection = JdbUtil.getConnection();
 					TimeJdbcDAO timeJdbcDAO = new TimeJdbcDAO(connection);
 					
-					timeJdbcDAO.delete(Integer.parseInt(txtID.getText()));
+					timeJdbcDAO.delete(Integer.parseInt(cboTime.getSelectedItem().toString()));
 					
 					dispose();
 				}
@@ -62,7 +79,7 @@ JLabel lblTitulo = new JLabel("Informe o ID do Time que você deseja apagar: ");
 		this.setVisible(true);
 		this.setSize(350,200);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 	}
 

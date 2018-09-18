@@ -21,8 +21,6 @@ public class ApagaPessoa extends JFrame{
 	JLabel lblTitulo = new JLabel("Informe o ID da Pessoa que você deseja apagar: ");
 	
 	JLabel lblID = new JLabel("ID: ");
-	JTextField txtID = new JTextField();
-	
 	JComboBox cboPessoa = new JComboBox();
 	
 	JButton btnApagar = new JButton("Apagar");
@@ -41,7 +39,6 @@ public class ApagaPessoa extends JFrame{
 		
 		cboPessoa.setBounds(60, 50, 150, 30);
 		paine.add(cboPessoa);
-		//txtID.setBounds(60, 50, 120, 30);
 		cboPessoa.addItem("");
 		
 		try {
@@ -83,7 +80,7 @@ public class ApagaPessoa extends JFrame{
 		this.setVisible(true);
 		this.setSize(350,200);
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLocationRelativeTo(null);		
 	}
 	

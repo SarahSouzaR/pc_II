@@ -38,7 +38,7 @@ public class CadTime extends JFrame{
 		paine.add(lblIdPesooa);
 		paine.add(cboUsuario);	
 		lblIdPesooa.setBounds(25, 20, 140, 30);
-		cboUsuario.setBounds(140, 20, 310, 30);	
+		cboUsuario.setBounds(140, 25, 310, 25);	
 		
 		cboUsuario.addItem("");		
 		
