@@ -1,0 +1,5 @@
+view\App.class
+model\Venda.class
+controller\ClienteJpaDAO.class
+controller\VendaJpaDAO.class
+model\Cliente.class
